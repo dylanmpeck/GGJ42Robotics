@@ -7,7 +7,10 @@ public class Generator : MonoBehaviour
     public List<Transform> spawnLocations;
     public GameObject cubePrefab;
     public GameObject hourglassPrefab;
+    public GameObject cubeSpawnChecker;
     float time = 0f;
+    public static bool readyToSpawn = true;
+    public static bool readyToSpawnCollectible = true;
 
     int currentLane = 1;
 
@@ -27,26 +30,28 @@ public class Generator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float tMult = 1.0f;
+/*        float tMult = 1.0f;
         if (GameManager.moveSpeed > 0)
-            tMult = (15.0f - (GameManager.moveSpeed / 15.0f)) / 15.0f;
+            tMult = (15.0f - (GameManager.moveSpeed / 15.0f)) / 15.0f;*/
 
-        if (time > 3.0f * tMult && !GameManager.begin)
+        if (readyToSpawn && !GameManager.begin)
         {
-            spawnedMiddleTime = false;
-            time = 0;
+            readyToSpawn = false;
+            //spawnedMiddleTime = false;
+            //time = 0;
             int totalObstacles = GetTotalObstacles();
             for (int i = 0; i < totalObstacles; i++)
             {
                 Transform t = spawnLocations[GetRandomLane()];
                 Instantiate(cubePrefab, t.position, t.rotation);
             }
-            Transform timeTransform = spawnLocations[GetRandomLane()];
-            GameObject h = Instantiate(hourglassPrefab, timeTransform.position, timeTransform.rotation);
+            Transform spawnCheckerTrans = spawnLocations[spawnLocations.Count / 2];
+            Instantiate(cubeSpawnChecker, spawnCheckerTrans.position, spawnCheckerTrans.rotation);
         }
-        else if (time > 3.0f * tMult && !GameManager.begin)
+        if (readyToSpawnCollectible && !GameManager.begin)
         {
-            spawnedMiddleTime = true;
+            readyToSpawnCollectible = false;
+            //spawnedMiddleTime = true;
             Transform timeTransform = spawnLocations[GetRandomLane()];
             GameObject h = Instantiate(hourglassPrefab, timeTransform.position, timeTransform.rotation);
         }

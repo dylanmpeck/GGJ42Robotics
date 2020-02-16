@@ -8,7 +8,7 @@ using WebSocketSharp;
 public class GameManager : MonoBehaviour
 {
     static public float percentComplete = 0.15f;
-    static public float moveSpeed = 0f;
+    static public float moveSpeed = 10f;
     static public float repairMultiplier = -0.01f;
 
     public static bool begin;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moveSpeed = 0f;
+        //moveSpeed = 0f;
         begin = true;
         win = false;
         lose = false;

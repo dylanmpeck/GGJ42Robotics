@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-
     public AudioSource collideSound;
 
     // Start is called before the first frame update
@@ -21,6 +20,9 @@ public class Move : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (tag == "SpawnChecker")
+            return;
+
         if (other.tag == "MainCamera")
         {
             collideSound.PlayOneShot(collideSound.clip);
