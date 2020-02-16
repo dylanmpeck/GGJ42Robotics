@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3587023360369529605}
   - component: {fileID: 2826197333086316899}
   - component: {fileID: 33980303664953310}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AmpulhetaGroup_masterAmpulheta_ctrl_HOURGLASS_MASTER_GRP_POLY_MESH_nurbsToPoly5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,6 +65,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -88,7 +89,7 @@ GameObject:
   - component: {fileID: 8738995507487620434}
   - component: {fileID: 7785013230850632616}
   - component: {fileID: 7718659014168372310}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AmpulhetaGroup_masterAmpulheta_ctrl_HOURGLASS_MASTER_GRP_nurbsToPoly1_POLY_MESH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,6 +143,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -165,7 +167,7 @@ GameObject:
   - component: {fileID: 2751520527727034128}
   - component: {fileID: 8581667579368077922}
   - component: {fileID: 2887702130111675942}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AmpulhetaGroup_masterAmpulheta_ctrl_HOURGLASS_MASTER_GRP_ampulhetaVidroDentro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,6 +221,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -242,7 +245,7 @@ GameObject:
   - component: {fileID: 6862557448455053685}
   - component: {fileID: 688526776180902407}
   - component: {fileID: 8375104053376227279}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: areia_top_AmpulhetaGroup_masterAmpulheta_ctrl_HOURGLASS_MASTER_GRP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,6 +299,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -319,7 +323,7 @@ GameObject:
   - component: {fileID: 4498379688577908212}
   - component: {fileID: 4498379688577908214}
   - component: {fileID: 4498379688577908215}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Particle Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5025,6 +5029,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5073,7 +5078,7 @@ GameObject:
   - component: {fileID: 5969391724190998253}
   - component: {fileID: 4275337971477083284}
   - component: {fileID: 8675411290554170264}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: hourglass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5252,7 +5257,7 @@ GameObject:
   - component: {fileID: 269693269876168245}
   - component: {fileID: 3911527166965528333}
   - component: {fileID: 1806851132098070633}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AmpulhetaGroup_masterAmpulheta_ctrl_HOURGLASS_MASTER_GRP_POLY_MESH_nurbsToPoly2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5306,6 +5311,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5329,7 +5335,7 @@ GameObject:
   - component: {fileID: 5245185943294238972}
   - component: {fileID: 7437421951586401063}
   - component: {fileID: 3020331139610048548}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AmpulhetaGroup_masterAmpulheta_ctrl_HOURGLASS_MASTER_GRP_areia_down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5383,6 +5389,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5406,7 +5413,7 @@ GameObject:
   - component: {fileID: 1917685669140529132}
   - component: {fileID: 8131513884029747226}
   - component: {fileID: 7344405520868259659}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AmpulhetaGroup_masterAmpulheta_ctrl_HOURGLASS_MASTER_GRP_POLY_MESH_nurbsToPoly4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5460,6 +5467,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5483,7 +5491,7 @@ GameObject:
   - component: {fileID: 1454106011559121938}
   - component: {fileID: 750619402613516766}
   - component: {fileID: 6400674539683731801}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AmpulhetaGroup_masterAmpulheta_ctrl_HOURGLASS_MASTER_GRP_POLY_MESH_nurbsToPoly3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5537,6 +5545,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5560,7 +5569,7 @@ GameObject:
   - component: {fileID: 4043069219907257434}
   - component: {fileID: 7761763304569881650}
   - component: {fileID: 6577485460526279476}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AmpulhetaGroup_masterAmpulheta_ctrl_HOURGLASS_MASTER_GRP_POLY_MESH_nurbsToPoly6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5614,6 +5623,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

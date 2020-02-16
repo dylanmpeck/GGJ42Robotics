@@ -31,6 +31,7 @@ public class GroundGenerator : MonoBehaviour
             Debug.Log("Spawn");
             GameObject ground = Instantiate(quadPrefab, transform.position, transform.rotation);
             ground.transform.Translate(0, 0, -0.1f, Space.World);
+            ground.transform.SetParent(transform);
         }
         //spawning = false;
     }

@@ -19,7 +19,7 @@ TagManager:
   - 
   - Ground
   - Mountain
-  - MountainGen
+  - Generator
   - PostProcess
   - Cube
   - 

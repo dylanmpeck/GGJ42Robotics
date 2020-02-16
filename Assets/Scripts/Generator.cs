@@ -43,10 +43,12 @@ public class Generator : MonoBehaviour
             for (int i = 0; i < totalObstacles; i++)
             {
                 Transform t = spawnLocations[GetRandomLane()];
-                Instantiate(cubePrefab, t.position, t.rotation);
+                GameObject cube = Instantiate(cubePrefab, t.position, t.rotation);
+                cube.transform.SetParent(transform);
             }
             Transform spawnCheckerTrans = spawnLocations[spawnLocations.Count / 2];
-            Instantiate(cubeSpawnChecker, spawnCheckerTrans.position, spawnCheckerTrans.rotation);
+            GameObject go = Instantiate(cubeSpawnChecker, spawnCheckerTrans.position, spawnCheckerTrans.rotation);
+            go.transform.SetParent(transform);
         }
         if (readyToSpawnCollectible && !GameManager.begin)
         {
@@ -54,6 +56,7 @@ public class Generator : MonoBehaviour
             //spawnedMiddleTime = true;
             Transform timeTransform = spawnLocations[GetRandomLane()];
             GameObject h = Instantiate(hourglassPrefab, timeTransform.position, timeTransform.rotation);
+            h.transform.SetParent(transform);
         }
         else
         {

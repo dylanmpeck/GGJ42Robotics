@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 315454915637295702}
   - component: {fileID: 1158977185608693444}
   - component: {fileID: 1970730731365801119}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ObstacleSpawnChecker
   m_TagString: SpawnChecker
   m_Icon: {fileID: 0}
