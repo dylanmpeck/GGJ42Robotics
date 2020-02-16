@@ -6,39 +6,81 @@ public class Generator : MonoBehaviour
 {
     public List<Transform> spawnLocations;
     public GameObject cubePrefab;
+    public GameObject hourglassPrefab;
     float time = 0f;
 
     int currentLane = 1;
 
+    List<bool> laneUsed = new List<bool>();
+
+    bool spawnedMiddleTime;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        foreach (Transform loc in spawnLocations)
+        {
+            laneUsed.Add(false);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (time > 2.0f)
+        float tMult = 1.0f;
+        if (GameManager.moveSpeed > 0)
+            tMult = (15.0f - (GameManager.moveSpeed / 15.0f)) / 15.0f;
+
+        if (time > 3.0f * tMult && !GameManager.begin)
         {
+            spawnedMiddleTime = false;
             time = 0;
-            Transform t = spawnLocations[Random.Range(0, spawnLocations.Count)];
-            Instantiate(cubePrefab, t.position, t.rotation);
+            int totalObstacles = GetTotalObstacles();
+            for (int i = 0; i < totalObstacles; i++)
+            {
+                Transform t = spawnLocations[GetRandomLane()];
+                Instantiate(cubePrefab, t.position, t.rotation);
+            }
+            Transform timeTransform = spawnLocations[GetRandomLane()];
+            GameObject h = Instantiate(hourglassPrefab, timeTransform.position, timeTransform.rotation);
+        }
+        else if (time > 3.0f * tMult && !GameManager.begin)
+        {
+            spawnedMiddleTime = true;
+            Transform timeTransform = spawnLocations[GetRandomLane()];
+            GameObject h = Instantiate(hourglassPrefab, timeTransform.position, timeTransform.rotation);
         }
         else
         {
             time += Time.deltaTime;
         }
+        ResetUsedLanes();
+    }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && currentLane > 0)
+    int GetRandomLane()
+    {
+        int lane = -1;
+        while (lane == -1 || laneUsed[lane] == true)
         {
-            currentLane--;
-            Camera.main.transform.position = new Vector3(spawnLocations[currentLane].transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
+            lane = Random.Range(0, spawnLocations.Count);
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow) && currentLane < 3)
-        {
-            currentLane++;
-            Camera.main.transform.position = new Vector3(spawnLocations[currentLane].transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
-        }
+        laneUsed[lane] = true;
+        return lane;
+    }
+
+    int GetTotalObstacles()
+    {
+        float roll = Random.Range(0.0f, 1.0f);
+        if (roll >= .80f)
+            return 3;
+        if (roll >= .5f)
+            return 2;
+        return 1;
+    }
+
+    void ResetUsedLanes()
+    {
+        for (int i = 0; i < laneUsed.Count; i++)
+            laneUsed[i] = false;
     }
 }

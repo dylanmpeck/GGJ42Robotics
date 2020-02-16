@@ -15,4 +15,4 @@ MonoBehaviour:
   targetDeviceTypes: 01000000
   handTrackingSupport: 0
   disableBackups: 1
-  enableNSCConfig: 1
+  enableNSCConfig: 0

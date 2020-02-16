@@ -6,7 +6,6 @@ public class GroundGenerator : MonoBehaviour
 {
     public GameObject quadPrefab;
     int collisionCount = 0;
-    bool spawning;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,21 +15,24 @@ public class GroundGenerator : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(collisionCount);
-        if (!spawning)
-            StartCoroutine(SpawnGround());
+        //Debug.Log(collisionCount);
+        //if (needToSpawn)
+        //{
+            SpawnGround();
+        //}
     }
 
-    IEnumerator SpawnGround()
+    void SpawnGround()
     {
-        spawning = true;
-        yield return new WaitForEndOfFrame();
+        //spawning = true;
+        //yield return new WaitForEndOfFrame();
         if (collisionCount == 0)
         {
+            Debug.Log("Spawn");
             GameObject ground = Instantiate(quadPrefab, transform.position, transform.rotation);
             ground.transform.Translate(0, 0, -0.1f, Space.World);
         }
-        spawning = false;
+        //spawning = false;
     }
 
     private void OnTriggerEnter(Collider other)
