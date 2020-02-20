@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class MoveMountain : MonoBehaviour
 {
-    float t = 0.0f;
-    Vector3 initialScale;
-    Vector3 secondScale;
-    Vector3 thirdScale;
-    Vector3 topScale;
+    float startScale, scaleMultiplier;
+    bool useBuffer = true;
 
-    float bpm = 80;
+    [SerializeField] AudioPeer audioPeer;
+
+    int band = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        initialScale = transform.localScale;
-        secondScale = new Vector3(initialScale.x, initialScale.y + 0.1f, initialScale.z);
-        thirdScale = new Vector3(initialScale.x, initialScale.y + 0.3f, initialScale.z);
-        topScale = new Vector3(initialScale.x, initialScale.y + .5f, initialScale.z);
+        audioPeer = GameObject.Find("Audio").GetComponent<AudioPeer>();
+        startScale = .5f;
+        scaleMultiplier = .5f;
     }
 
     // Update is called once per frame
@@ -25,15 +24,11 @@ public class MoveMountain : MonoBehaviour
     {
         this.transform.position += -transform.forward * GameManager.moveSpeed * Time.deltaTime;
 
-       
-        t += Time.deltaTime / (60 / bpm);
-        if (t >= (60f / bpm))
-            t = 0;
-        this.transform.localScale = cubeBezier3(initialScale, topScale, thirdScale, secondScale, t);
-    }
+        if (float.IsNaN(audioPeer.amplitude)) return;
 
-    public static Vector3 cubeBezier3(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
-    {
-        return (((-p0 + 3 * (p1 - p2) + p3) * t + (3 * (p0 + p2) - 6 * p1)) * t + 3 * (p1 - p0)) * t + p0;
+            transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(transform.localScale.x,
+                                   (audioPeer.audioBandBuffer[band] * scaleMultiplier) + startScale,
+                                    transform.localScale.z),
+                                    .5f);
     }
 }

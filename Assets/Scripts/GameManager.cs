@@ -7,33 +7,36 @@ using WebSocketSharp;
 
 public class GameManager : MonoBehaviour
 {
-    static public float percentComplete = 0.15f;
-    static public float moveSpeed = 10f;
-    static public float repairMultiplier = -0.01f;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject headTiltText;
+    [SerializeField] GameObject timePieceText;
+    static GameObject timePieceTextRef;
+
+    Vector3 startDirToHeadTiltText;
+    float startDirZ;
+
+    static public float moveSpeed = 0f;
+
+    static public int currentScore = 0;
 
     public static bool begin;
-    public static bool lose;
-    public static bool win;
-
-    public Text heartPercentText;
-    public Text winText;
-    public Text loseText;
+/*    public static bool lose;
+    public static bool win;*/
 
     public AudioSource winSound;
 
     public string urlToRefresh;
     WebSocket ws;
 
-    float timer = 0.0f;
-
     // Start is called before the first frame update
     void Start()
     {
-        //moveSpeed = 0f;
+        moveSpeed = 0f;
         begin = true;
-        win = false;
-        lose = false;
-        percentComplete = .15f;
+        startDirToHeadTiltText = (headTiltText.transform.position - player.transform.position).normalized;
+        startDirZ = startDirToHeadTiltText.z;
+
+        timePieceTextRef = timePieceText;
     }
 
     // Update is called once per frame
@@ -43,75 +46,63 @@ public class GameManager : MonoBehaviour
 
         if (!Mathf.Approximately(moveSpeed, 0))
             begin = false;
-        
-        if (Mathf.Approximately(percentComplete, 0.0f) && !lose)
+
+/*        if (startDirZ < 0.0f && (headTiltText.transform.position - player.transform.position).normalized.z > 0.0f ||
+            startDirZ > 0.0f && (headTiltText.transform.position - player.transform.position).normalized.z < 0.0f)
         {
-            lose = true;
-            StartCoroutine(LoseGame());
-        }
-
-        if (Mathf.Approximately(percentComplete, 1.0f) && !win)
-        {
-            win = true;
-            StartCoroutine(WinGame());
-        }
-
-        if (timer >= 3.3f)
-        {
-            timer = 0.0f;
-            percentComplete -= .01f;
-        }
-        else
-            timer += Time.deltaTime;
-
-        if (PictureManager.forward == false && !heartPercentText.isActiveAndEnabled)
-        {
-            heartPercentText.enabled = true;
-        }
-
-        heartPercentText.text = Mathf.Round((percentComplete * 100)).ToString() + "%";
-
-        //Debug.Log(percentComplete);
-        //percentComplete += Time.deltaTime * repairMultiplier;
-        percentComplete = Mathf.Clamp(percentComplete, 0.0f, 1.0f);
-        //repairMultiplier -= .000001f;
-        //Mathf.Clamp(repairMultiplier, -.008f, .008f);
+            timePieceText.SetActive(true);
+        }*/
     }
 
-    IEnumerator WinGame()
+    public static void Score()
     {
-        moveSpeed = 0.0f;
-        winText.enabled = true;
-        winSound.PlayOneShot(winSound.clip);
-        yield return new WaitForSeconds(3.0f);
-        SceneManager.LoadScene("SampleScene");
+        currentScore++;
+        timePieceTextRef.GetComponent<TextMesh>().text = "TP: " + currentScore.ToString();
+
+        if (currentScore == 1)
+            timePieceTextRef.SetActive(true);
     }
 
-    IEnumerator LoseGame()
+    /*    IEnumerator WinGame()
+        {
+            moveSpeed = 0.0f;
+            winText.enabled = true;
+            winSound.PlayOneShot(winSound.clip);
+            yield return new WaitForSeconds(3.0f);
+            SceneManager.LoadScene("SampleScene");
+        }
+
+        IEnumerator LoseGame()
+        {
+            moveSpeed = 0.0f;
+            loseText.enabled = true;
+            yield return new WaitForSeconds(3.0f);
+            SceneManager.LoadScene("SampleScene");
+        }*/
+
+    private void OnEnable()
     {
-        moveSpeed = 0.0f;
-        loseText.enabled = true;
-        yield return new WaitForSeconds(3.0f);
-        SceneManager.LoadScene("SampleScene");
+        ws = new WebSocket("ws://192.168.4.1:8765");
+        ws.OnOpen += (sender, e) => Debug.Log("Listening to WebSocket " + urlToRefresh);
+        ws.OnMessage += (sender, e) => SetSpeed(e);
+        ws.OnError += (sender, e) => Debug.Log("WebSocket Error: " + e.Message);
+        ws.OnClose += (sender, e) => Debug.Log("WebSocket Close " + e.Code);
+        ws.OnMessage += (sender, e) => Debug.Log("Received Message");
+
+        ws.Connect();
     }
 
-    //private void OnEnable()
-    //{
-    //    ws = new WebSocket(urlToRefresh);
-    //    ws.OnOpen += (sender, e) => Debug.Log("Listening to WebSocket " + urlToRefresh);
-    //    ws.OnMessage += (sender, e) => Debug.Log("Received " + e.Data + " " + e.Data.GetType());
-    //    ws.OnError += (sender, e) => Debug.Log("WebSocket Error: " + e.Message);
-    //    ws.OnClose += (sender, e) => Debug.Log("WebSocket Close " + e.Code);
-    //    ws.OnMessage += (sender, e) => Debug.Log("Received Message");
+    private void OnDisable()
+    {
+        if (ws != null && ws.ReadyState == WebSocketState.Open)
+        {
+            ws.Close();
+        }
+    }
 
-    //    ws.Connect();
-    //}
-
-    //private void OnDisable()
-    //{
-    //    if (ws != null && ws.ReadyState == WebSocketState.Open)
-    //    {
-    //        ws.Close();
-    //    }
-    //}
+    void SetSpeed(MessageEventArgs e)
+    {
+        Debug.Log("Received " + e.Data + " " + e.Data.GetType());
+        moveSpeed = (float.Parse(e.Data) / 360.0f);
+    }
 }

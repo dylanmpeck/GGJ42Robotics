@@ -26,8 +26,7 @@ public class Move : MonoBehaviour
         if (other.tag == "MainCamera")
         {
             collideSound.PlayOneShot(collideSound.clip);
-            ScreenShakeVR.TriggerShake(0.65f, .5f);
-            GameManager.percentComplete -= .04f;
+           // ScreenShakeVR.TriggerShake(0.3f, .3f);
         }
     }
 }
