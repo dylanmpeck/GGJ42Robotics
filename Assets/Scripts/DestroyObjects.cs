@@ -18,6 +18,9 @@ public class DestroyObjects : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
+        if (other.tag == "Rock")
+            Destroy(other.transform.parent.gameObject);
+        else
+            Destroy(other.gameObject);
     }
 }

@@ -11,43 +11,65 @@ public class MoveCameraRig : MonoBehaviour
     int currentLane = 1;
     public Transform head;
 
+    bool lanePosSet;
+
     public Text debug;
     public GameObject rightController;
     // Start is called before the first frame update
     void Start()
     {
 
-        foreach (Transform l in lanes)
-        {
-            lanePositions.Add(l.position);
-        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(head.localEulerAngles);
-        if (head.localEulerAngles.z > 15.0f && head.localEulerAngles.z < 100.0f)
+        if (GameManager.bikePathPlaced)
         {
-            float speedPercantage = Mathf.Clamp(head.localEulerAngles.z / 45.0f, 0f, 1f);
-            float speed = speedPercantage * 8.0f;
-            if (currentLane == 0)
-                return;
-            this.transform.position = 
-                Vector3.MoveTowards(transform.position, new Vector3(lanePositions[currentLane - 1].x, transform.position.y, transform.position.z), speed * Time.deltaTime);
-            if (Mathf.Approximately(transform.position.x, lanePositions[currentLane - 1].x))
-                currentLane--;
+            if (!lanePosSet)
+            {
+                lanePosSet = true;
+                SetLanePositions();
+            }
+            //Debug.Log(head.localEulerAngles);
+            if (head.localEulerAngles.z > 15.0f && head.localEulerAngles.z < 100.0f)
+            {
+                float speedPercantage = Mathf.Clamp(head.localEulerAngles.z / 45.0f, 0f, 1f);
+                float speed = speedPercantage * 8.0f;
+                if (currentLane == 0)
+                    return;
+                /*                this.transform.position =
+                                    Vector3.MoveTowards(transform.position, new Vector3(lanePositions[currentLane - 1].x, transform.position.y, transform.position.z), speed * Time.deltaTime);
+                                if (Mathf.Approximately(transform.position.x, lanePositions[currentLane - 1].x))
+                                    currentLane--;*/
+                this.transform.position = Vector3.MoveTowards(transform.position, lanePositions[currentLane - 1], speed * Time.deltaTime);
+                if (Vector3.Distance(transform.position, lanePositions[currentLane - 1]) <= 0.4f)
+                    currentLane--;
+            }
+            if (head.localEulerAngles.z < 354.0f && head.localEulerAngles.z > 300.0f)
+            {
+                float speedPercantage = Mathf.Clamp(head.localEulerAngles.z / 45.0f, 0f, 1f);
+                float speed = speedPercantage * 8.0f;
+                if (currentLane == lanePositions.Count - 1)
+                    return;
+                /*                this.transform.position =
+                                    Vector3.MoveTowards(transform.position, new Vector3(lanePositions[currentLane + 1].x, transform.position.y, transform.position.z), speed * Time.deltaTime);
+                                if (Mathf.Approximately(transform.position.x, lanePositions[currentLane + 1].x))
+                                    currentLane++;*/
+
+                this.transform.position = Vector3.MoveTowards(transform.position, lanePositions[currentLane + 1], speed * Time.deltaTime);
+                if (Vector3.Distance(transform.position, lanePositions[currentLane + 1]) <= 0.4f)
+                    currentLane++;
+            }
         }
-        if (head.localEulerAngles.z < 354.0f && head.localEulerAngles.z > 300.0f)
+    }
+
+    void SetLanePositions()
+    {
+        foreach (Transform l in lanes)
         {
-            float speedPercantage = Mathf.Clamp(head.localEulerAngles.z / 45.0f, 0f, 1f);
-            float speed = speedPercantage * 8.0f;
-            if (currentLane == lanePositions.Count - 1)
-                return;
-            this.transform.position =
-                Vector3.MoveTowards(transform.position, new Vector3(lanePositions[currentLane + 1].x, transform.position.y, transform.position.z), speed * Time.deltaTime);
-            if (Mathf.Approximately(transform.position.x, lanePositions[currentLane + 1].x))
-                currentLane++;
+            lanePositions.Add(l.position);
         }
     }
 }

@@ -11,13 +11,13 @@ public class Hourglass : MonoBehaviour
     void Start()
     {
         pickupSound = GetComponent<AudioSource>();
-        origYPos = transform.position.y;
+        origYPos = transform.localPosition.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, origYPos + Mathf.Sin(Time.time * 0.8f) * 0.5f, transform.position.z);
+        transform.localPosition = new Vector3(transform.localPosition.x, origYPos + Mathf.Sin(Time.time * 0.8f) * 0.5f, transform.localPosition.z);
         this.transform.position += transform.forward * GameManager.moveSpeed * Time.deltaTime;
     }
 

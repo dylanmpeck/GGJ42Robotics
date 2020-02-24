@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject headTiltText;
     [SerializeField] GameObject timePieceText;
     static GameObject timePieceTextRef;
+    [SerializeField] GameObject bikePath;
 
     Vector3 startDirToHeadTiltText;
     float startDirZ;
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
     static public float moveSpeed = 0f;
 
     static public int currentScore = 0;
+
+    public static bool bikePathPlaced;
 
     public static bool begin;
 /*    public static bool lose;
@@ -27,6 +30,9 @@ public class GameManager : MonoBehaviour
 
     public string urlToRefresh;
     WebSocket ws;
+
+    float unitySpeedMax = 30.0f;
+    float bikeSpeedMax = 120.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -102,7 +108,19 @@ public class GameManager : MonoBehaviour
 
     void SetSpeed(MessageEventArgs e)
     {
+        if (bikePathPlaced == false) return;
         Debug.Log("Received " + e.Data + " " + e.Data.GetType());
-        moveSpeed = (float.Parse(e.Data) / 360.0f);
+        if (float.Parse(e.Data) <= 0.0f)
+        {
+            moveSpeed = 0.0f;
+            return;
+        }
+
+        moveSpeed = (float.Parse(e.Data) / bikeSpeedMax) * unitySpeedMax;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

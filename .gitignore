@@ -58,6 +58,9 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+/Build
+/Builds2
+
 /Assets/Audio
 
 /Assets/y2mate*

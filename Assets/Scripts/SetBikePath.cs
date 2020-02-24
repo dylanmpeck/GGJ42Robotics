@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class SetBikePath : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        transform.position = Camera.main.transform.position;
-    }
+    [SerializeField] GameObject BikePath;
+    [SerializeField] GameObject Arrow;
+    [SerializeField] GameObject RestartButton;
+    [SerializeField] GameObject SelectSong;
 
-    // Update is called once per frame
-    void Update()
+    public void PlaceBikePath()
     {
-        
+        Arrow.SetActive(false);
+        BikePath.transform.position = Camera.main.transform.position;
+        BikePath.transform.forward = Camera.main.transform.forward;
+        BikePath.gameObject.SetActive(true);
+        GameManager.bikePathPlaced = true;
+        RestartButton.SetActive(true);
+        SelectSong.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 }

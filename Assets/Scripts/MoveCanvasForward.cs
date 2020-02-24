@@ -13,6 +13,6 @@ public class MoveCanvasForward : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<RectTransform>().position += -Vector3.forward * GameManager.moveSpeed * Time.deltaTime;
+        GetComponent<RectTransform>().position += -transform.forward * GameManager.moveSpeed * Time.deltaTime;
     }
 }

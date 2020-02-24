@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -2460298353302333650}
   m_Layer: 0
   m_Name: rock_p
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad1c16a0d83844fa942de61c70f323b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioPeer: {fileID: 0}
+  origColor: {r: 1, g: 0, b: 0.8666667, a: 0}
+  brightColor: {r: 1, g: 0, b: 0.51675415, a: 0}
 --- !u!1 &8364519581873772178
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +62,7 @@ GameObject:
   - component: {fileID: 2386616940886586948}
   m_Layer: 9
   m_Name: rock_graphics
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
